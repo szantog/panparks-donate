@@ -1,0 +1,6 @@
+name = Panparks Donate
+description = Photo Donate form for panparks.org
+package = Panparks
+core = 7.x
+
+dependencies[] = bean
