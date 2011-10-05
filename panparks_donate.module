@@ -34,6 +34,9 @@ function panparks_donate_form_wilderness_supporter() {
     'submit' => array(
       '#type' => 'submit',
       '#value' => t('Donate'),
+      '#attributes' => array(
+        'id' => 'ws_submit'
+      )
     ),
     'cmd' => array(
       '#type' => 'hidden',
@@ -55,7 +58,7 @@ function panparks_donate_form_wilderness_supporter() {
       '#type' => 'hidden',
       '#value' => 10,
       '#attributes' => array(
-        'id' => 'ammount'
+        'id' => 'ammount-1'
       )
     ),
     'currency_code' => array(
@@ -91,6 +94,9 @@ function panparks_donate_form_support_documentary() {
     'submit' => array(
       '#type' => 'submit',
       '#value' => t('Donate'),
+      '#attributes' => array(
+        'id' => 'sd_submit'
+      )
     ),
     'cmd' => array(
       '#type' => 'hidden',
@@ -111,6 +117,9 @@ function panparks_donate_form_support_documentary() {
     'amount' => array(
       '#type' => 'hidden',
       '#default_value' => 10,
+      '#attributes' => array(
+        'id' => 'ammount-2'
+      )
     ),
     'currency_code' => array(
       '#type' => 'hidden',
