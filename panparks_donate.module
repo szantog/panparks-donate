@@ -150,3 +150,10 @@ function panparks_donate_block_view_bean_12_alter(&$data, $block) {
     '#weight' => 100,
   );
 }
+
+function panparks_donate_block_view_bean_3_alter(&$data, $block) {
+  $data['content']['bean'][3]['form'] = array(
+    'form' => drupal_get_form('panparks_donate_form_wilderness_supporter'),
+    '#weight' => 100,
+  );
+}
