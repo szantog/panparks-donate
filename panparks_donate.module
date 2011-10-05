@@ -12,142 +12,132 @@
  *
  */
 
-function panparks_donate_form($form, &$form_state, $op) {
-  drupal_add_js(drupal_get_path('module', 'panpakrs_donate') . '/panparks_donate.js');
-  switch($op) {
-    case 'wilderness_supporter':
-      $form = array(
-        '#action' => 'https://www.paypal.com/cgi-bin/webscr',
-        'amountSelector' => array(
-          '#title' => t('I want to give:'),
-          '#type' => 'radios',
-          '#default_value' => 10,
-          '#options' => array(
-            '10' => '€10',
-            '25' => '€25',
-            '100' => '€100',
-          ),
-        ),
-        'uniqueAmount' => array(
-          '#type' => 'textfield',
-          '#title' => t('Or choose your amount €'),
-          '#size'=> 15,
-        ),
-        'submit' => array(
-          '#type' => 'submit',
-          '#value' => t('Donate'),
-        ),
-        'cmd' => array(
-          '#type' => 'hidden',
-          '#value' => '_donations',
-        ),
-        'business' => array(
-          '#type' => 'hidden',
-          '#value' => 'hhoffmann@panparks.org',
-        ),
-        'lc' => array(
-          '#type' => 'hidden',
-          '#value' => 'US',
-        ),
-        'item_name' => array(
-          '#type' => 'hidden',
-          '#value' => 'panparks.org - GENERAL SUPPORT',
-        ),
-        'amount' => array(
-          '#type' => 'hidden',
-          '#value' => 10,
-          '#attributes' => array(
-            'id' => 'ammount'
-          )
-        ),
-        'currency_code' => array(
-          '#type' => 'hidden',
-          '#value' => 'EUR',
-        ),
-        'no_note' => array(
-          '#type' => 'hidden',
-          '#value' => '0',
-        ),
-        'bn' => array(
-          '#type' => 'hidden',
-          '#value' => 'PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest',
-        ),
-        '#validate' => array('panparks_donate_form_validate'),
+function panparks_donate_form_wilderness_supporter() {
+  drupal_add_js(drupal_get_path('module', 'panparks_donate') . '/panparks_donate.js');
+  $form = array(
+    '#action' => 'https://www.paypal.com/cgi-bin/webscr',
+    'amountSelector' => array(
+      '#title' => t('I want to give:'),
+      '#type' => 'radios',
+      '#default_value' => 10,
+      '#options' => array(
+        '10' => '€10',
+        '25' => '€25',
+        '100' => '€100',
+      ),
+    ),
+    'uniqueAmount' => array(
+      '#type' => 'textfield',
+      '#title' => t('Or choose your amount €'),
+      '#size'=> 15,
+    ),
+    'submit' => array(
+      '#type' => 'submit',
+      '#value' => t('Donate'),
+    ),
+    'cmd' => array(
+      '#type' => 'hidden',
+      '#value' => '_donations',
+    ),
+    'business' => array(
+      '#type' => 'hidden',
+      '#value' => 'hhoffmann@panparks.org',
+    ),
+    'lc' => array(
+      '#type' => 'hidden',
+      '#value' => 'US',
+    ),
+    'item_name' => array(
+      '#type' => 'hidden',
+      '#value' => 'panparks.org - GENERAL SUPPORT',
+    ),
+    'amount' => array(
+      '#type' => 'hidden',
+      '#value' => 10,
+      '#attributes' => array(
+        'id' => 'ammount'
+      )
+    ),
+    'currency_code' => array(
+      '#type' => 'hidden',
+      '#value' => 'EUR',
+    ),
+    'no_note' => array(
+      '#type' => 'hidden',
+      '#value' => '0',
+    ),
+    'bn' => array(
+      '#type' => 'hidden',
+      '#value' => 'PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest',
+    ),
+  );
+  return $form;
+}
 
-      );
-      break;
-
-    case 'support_documentary':
-      $form = array(
-        '#action' => 'https://www.paypal.com/cgi-bin/webscr',
-        'amountSelector' => array(
-          '#title' => t('I want to give:'),
-          '#type' => 'radios',
-          '#default_value' => 10,
-          '#options' => array(
-            '10' => '€10',
-            '15' => '€15',
-            '20' => '€20',
-          ),
-        ),
-        'submit' => array(
-          '#type' => 'submit',
-          '#value' => t('Donate'),
-        ),
-        'cmd' => array(
-          '#type' => 'hidden',
-          '#value' => '_donations',
-        ),
-        'business' => array(
-          '#type' => 'hidden',
-          '#value' => 'hhoffmann@panparks.org',
-        ),
-        'lc' => array(
-          '#type' => 'hidden',
-          '#value' => 'US',
-        ),
-        'item_name' => array(
-          '#type' => 'hidden',
-          '#value' => 'panparks.org - GENERAL SUPPORT',
-        ),
-        'amount' => array(
-          '#type' => 'hidden',
-          '#default_value' => 10,
-        ),
-        'currency_code' => array(
-          '#type' => 'hidden',
-          '#value' => 'EUR',
-        ),
-        'no_note' => array(
-          '#type' => 'hidden',
-          '#value' => '0',
-        ),
-        'bn' => array(
-          '#type' => 'hidden',
-          '#value' => 'PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest',
-        ),
-        '#validate' => array('panparks_donate_form_validate'),
-
-      );
-      break;
-
-    default:
-      break;
-  }
-
+function panparks_donate_form_support_documentary() {
+  drupal_add_js(drupal_get_path('module', 'panparks_donate') . '/panparks_donate.js');
+  $form = array(
+    '#action' => 'https://www.paypal.com/cgi-bin/webscr',
+    'amountSelector' => array(
+      '#title' => t('I want to give:'),
+      '#type' => 'radios',
+      '#default_value' => 10,
+      '#options' => array(
+        '10' => '€10',
+        '15' => '€15',
+        '20' => '€20',
+      ),
+    ),
+    'submit' => array(
+      '#type' => 'submit',
+      '#value' => t('Donate'),
+    ),
+    'cmd' => array(
+      '#type' => 'hidden',
+      '#value' => '_donations',
+    ),
+    'business' => array(
+      '#type' => 'hidden',
+      '#value' => 'hhoffmann@panparks.org',
+    ),
+    'lc' => array(
+      '#type' => 'hidden',
+      '#value' => 'US',
+    ),
+    'item_name' => array(
+      '#type' => 'hidden',
+      '#value' => 'panparks.org - GENERAL SUPPORT',
+    ),
+    'amount' => array(
+      '#type' => 'hidden',
+      '#default_value' => 10,
+    ),
+    'currency_code' => array(
+      '#type' => 'hidden',
+      '#value' => 'EUR',
+    ),
+    'no_note' => array(
+      '#type' => 'hidden',
+      '#value' => '0',
+    ),
+    'bn' => array(
+      '#type' => 'hidden',
+      '#value' => 'PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest',
+    ),
+  );
   return $form;
 }
 
 function panparks_donate_block_view_bean_11_alter(&$data, $block) {
   $data['content']['bean'][11]['form'] = array(
-    'form' => drupal_get_form('panparks_donate_form', 'wilderness_supporter'),
+    'form' => drupal_get_form('panparks_donate_form_wilderness_supporter'),
     '#weight' => 100,
   );
 }
 
 function panparks_donate_block_view_bean_12_alter(&$data, $block) {
   $data['content']['bean'][12]['form'] = array(
-    'form' => drupal_get_form('panparks_donate_form', 'wilderness_supporter'),
+    'form' => drupal_get_form('panparks_donate_form_support_documentary'),
     '#weight' => 100,
   );
 }
