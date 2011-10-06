@@ -138,20 +138,35 @@ function panparks_donate_form_support_documentary($form, $form_state, $suffix = 
   return $form;
 }
 
+/*
+ * Implements hook_block_MODULE_BLOCK_ID_alter
+ * Insert form after content block Became a wilderness supporter
+ */
 function panparks_donate_block_view_bean_11_alter(&$data, $block) {
   $data['content']['bean'][11]['form'] = array(
     'form' => drupal_get_form('panparks_donate_form_wilderness_supporter', TRUE),
     '#weight' => 100,
   );
+  $data['content']['bean'][11]['field_image']['#weight'] = 99;
 }
 
+/*
+ * Implements hook_block_MODULE_BLOCK_ID_alter
+ * Insert form after content after Support the unique documentary of wilderness block
+ */
 function panparks_donate_block_view_bean_12_alter(&$data, $block) {
   $data['content']['bean'][12]['form'] = array(
     'form' => drupal_get_form('panparks_donate_form_support_documentary', TRUE),
     '#weight' => 100,
   );
+  //Increase weight to render after body
+  $data['content']['bean'][12]['field_body']['#weight'] = 2;
 }
 
+/*
+ * Implements hook_block_MODULE_BLOCK_ID_alter
+ * Insert form after front page donate block content
+ */
 function panparks_donate_block_view_bean_3_alter(&$data, $block) {
   $data['content']['bean'][3]['form'] = array(
     'form' => drupal_get_form('panparks_donate_form_wilderness_supporter'),
