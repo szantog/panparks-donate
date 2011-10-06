@@ -12,7 +12,7 @@
  *
  */
 
-function panparks_donate_form_wilderness_supporter() {
+function panparks_donate_form_wilderness_supporter($form, $form_state, $suffix = FALSE) {
   drupal_add_js(drupal_get_path('module', 'panparks_donate') . '/panparks_donate.js');
   $form = array(
     '#action' => 'https://www.paypal.com/cgi-bin/webscr',
@@ -21,15 +21,16 @@ function panparks_donate_form_wilderness_supporter() {
       '#type' => 'radios',
       '#default_value' => 10,
       '#options' => array(
-        '10' => '€10',
-        '25' => '€25',
-        '100' => '€100',
+        '10' => $suffix ? '<span class="value">€10</span><span class="suffix">' . t('will buy you guaranteed protection of 10 hectares in Europe for a year') .'</span>' : '€10',
+        '25' =>$suffix ? '<span class="value">€25</span><span class="suffix">' . t('will enable us to mark the most valuable wilderness areas with signs') .'</span>' : '€25',
+        '100' => $suffix ? '<span class="value">€100</span><span class="suffix">' . t('will ensure monitoring of animals for 2 months') .'</span>' : '€100',
       ),
     ),
     'uniqueAmount' => array(
       '#type' => 'textfield',
       '#title' => t('Or choose your amount €'),
       '#size'=> 15,
+      //'#field_prefix' => '€',
     ),
     'submit' => array(
       '#type' => 'submit',
@@ -77,7 +78,7 @@ function panparks_donate_form_wilderness_supporter() {
   return $form;
 }
 
-function panparks_donate_form_support_documentary() {
+function panparks_donate_form_support_documentary($form, $form_state, $suffix = FALSE) {
   drupal_add_js(drupal_get_path('module', 'panparks_donate') . '/panparks_donate.js');
   $form = array(
     '#action' => 'https://www.paypal.com/cgi-bin/webscr',
@@ -86,9 +87,9 @@ function panparks_donate_form_support_documentary() {
       '#type' => 'radios',
       '#default_value' => 10,
       '#options' => array(
-        '10' => '€10',
-        '15' => '€15',
-        '20' => '€20',
+        '10' => $suffix ? '<span class="value">€10</span><span class="suffix">' . t('contribution to equipment') .'</span>' : '€10',
+        '15' => $suffix ? '<span class="value">€15</span><span class="suffix">' . t('one day food supply') .'</span>' : '€15',
+        '20' => $suffix ? '<span class="value">€20</span><span class="suffix">' . t('education about wilderness for youth') .'</span>' : '€20',
       ),
     ),
     'submit' => array(
@@ -139,14 +140,14 @@ function panparks_donate_form_support_documentary() {
 
 function panparks_donate_block_view_bean_11_alter(&$data, $block) {
   $data['content']['bean'][11]['form'] = array(
-    'form' => drupal_get_form('panparks_donate_form_wilderness_supporter'),
+    'form' => drupal_get_form('panparks_donate_form_wilderness_supporter', TRUE),
     '#weight' => 100,
   );
 }
 
 function panparks_donate_block_view_bean_12_alter(&$data, $block) {
   $data['content']['bean'][12]['form'] = array(
-    'form' => drupal_get_form('panparks_donate_form_support_documentary'),
+    'form' => drupal_get_form('panparks_donate_form_support_documentary', TRUE),
     '#weight' => 100,
   );
 }
