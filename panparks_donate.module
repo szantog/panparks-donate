@@ -15,7 +15,6 @@
 function panparks_donate_form_wilderness_supporter($form, $form_state, $suffix = FALSE) {
   drupal_add_js(drupal_get_path('module', 'panparks_donate') . '/panparks_donate.js');
   $form = array(
-    '#action' => 'https://www.paypal.com/cgi-bin/webscr',
     'amountSelector' => array(
       '#title' => t('I want to give:'),
       '#type' => 'radios',
@@ -39,41 +38,11 @@ function panparks_donate_form_wilderness_supporter($form, $form_state, $suffix =
         'id' => 'ws_submit'
       )
     ),
-    'cmd' => array(
-      '#type' => 'hidden',
-      '#value' => '_donations',
-    ),
-    'business' => array(
-      '#type' => 'hidden',
-      '#value' => 'hhoffmann@panparks.org',
-    ),
-    'lc' => array(
-      '#type' => 'hidden',
-      '#value' => 'US',
-    ),
-    'item_name' => array(
-      '#type' => 'hidden',
-      '#value' => 'panparks.org - GENERAL SUPPORT',
-    ),
     'amount' => array(
       '#type' => 'hidden',
       '#value' => 10,
-      '#attributes' => array(
-        'id' => 'ammount-1'
-      )
     ),
-    'currency_code' => array(
-      '#type' => 'hidden',
-      '#value' => 'EUR',
-    ),
-    'no_note' => array(
-      '#type' => 'hidden',
-      '#value' => '0',
-    ),
-    'bn' => array(
-      '#type' => 'hidden',
-      '#value' => 'PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest',
-    ),
+    '#submit' => array('panparks_donate_form_submit'),
   );
   return $form;
 }
@@ -81,7 +50,6 @@ function panparks_donate_form_wilderness_supporter($form, $form_state, $suffix =
 function panparks_donate_form_support_documentary($form, $form_state, $suffix = FALSE) {
   drupal_add_js(drupal_get_path('module', 'panparks_donate') . '/panparks_donate.js');
   $form = array(
-    '#action' => 'https://www.paypal.com/cgi-bin/webscr',
     'amountSelector' => array(
       '#title' => t('I want to give:'),
       '#type' => 'radios',
@@ -99,45 +67,19 @@ function panparks_donate_form_support_documentary($form, $form_state, $suffix = 
         'id' => 'sd_submit'
       )
     ),
-    'cmd' => array(
-      '#type' => 'hidden',
-      '#value' => '_donations',
-    ),
-    'business' => array(
-      '#type' => 'hidden',
-      '#value' => 'hhoffmann@panparks.org',
-    ),
-    'lc' => array(
-      '#type' => 'hidden',
-      '#value' => 'US',
-    ),
-    'item_name' => array(
-      '#type' => 'hidden',
-      '#value' => 'panparks.org - GENERAL SUPPORT',
-    ),
     'amount' => array(
       '#type' => 'hidden',
-      '#default_value' => 10,
-      '#attributes' => array(
-        'id' => 'ammount-2'
-      )
+      '#value' => 10,
     ),
-    'currency_code' => array(
-      '#type' => 'hidden',
-      '#value' => 'EUR',
-    ),
-    'no_note' => array(
-      '#type' => 'hidden',
-      '#value' => '0',
-    ),
-    'bn' => array(
-      '#type' => 'hidden',
-      '#value' => 'PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest',
-    ),
+    '#submit' => array('panparks_donate_form_submit'),
   );
   return $form;
 }
 
+function panparks_donate_form_submit($form, &$form_state) {
+  $url = url('node/3440', array('absolute' => TRUE, 'query' => array('default_amount' => $form_state['input']['amount'])));
+  $form_state['redirect'] = $url;
+}
 /*
  * Implements hook_block_MODULE_BLOCK_ID_alter
  * Insert form after content block Became a wilderness supporter
