@@ -10,27 +10,20 @@
       $("input:radio[name='amountSelector']", context).click(function () {
         $("input[name='amount']").val($(this).val());
         //alert($(this).val());
-     });
+      });
 
       $("input[name='uniqueAmount']", context).focus(function () {
         $("input:radio[name='amountSelector']").attr("checked" , false );
-     });
+      });
 
       $("input[name='uniqueAmount']", context).focusout(function () {
         $("input[name='amount']").val($(this).val());
-     });
-
-      $("#ws_submit", context).click(function () {
-        if (isNaN(parseInt($('#ammount-1').val()))){
-          alert('Invalid amount');
-          return false;
-        }
-     });
+      });
 
       $("#panparks-donate-form-support-documentary input:radio[name='amountSelector']", context).click(function () {
         $("input[name='amount']").val($(this).val());
         //alert($(this).val());
-     });
+      });
     }
   };
 
